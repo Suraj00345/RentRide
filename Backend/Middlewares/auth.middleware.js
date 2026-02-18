@@ -10,8 +10,8 @@ const ensureAuthenticated = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(auth, process.env.JWT_SECRET);
-    console.log(decoded);
     req.user = decoded;
+    // console.log(decoded);
     next();
   } catch (err) {
     return res

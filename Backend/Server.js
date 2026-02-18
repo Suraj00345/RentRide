@@ -3,7 +3,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 const authRoutes = require("./Routes/auth.routes.js");
-const carRoutes = require("./Routes/car.routes.js")
+const carRoutes = require("./Routes/car.routes.js");
+const bookingRoutes = require("./Routes/booking.routes.js");
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(
 //Routes
 app.use("/auth", authRoutes);
 app.use("/car", carRoutes);
+app.use("/booking", bookingRoutes);
 
 //Health Check
 app.get("/ping", (req, res) => {
