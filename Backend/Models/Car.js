@@ -7,7 +7,11 @@ const carSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-
+    images: [
+      {
+        type: String,
+      },
+    ],
     carName: {
       type: String,
       required: true,
