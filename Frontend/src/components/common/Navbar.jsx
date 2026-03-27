@@ -43,11 +43,13 @@ const Navbar = () => {
                             </div>
                         )
                         : (
+                            <Link to="/register" >
                             <div className='hidden md:flex'>
                                 <button className='bg-lime-900 text-white px-9 py-2 rounded-full'>
                                     Login
                                 </button>
                             </div>
+                            </Link>
                         )
                 }
 
