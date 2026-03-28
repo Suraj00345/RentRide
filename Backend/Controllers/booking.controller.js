@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Booking = require("../Models/Booking");
 const Car = require("../Models/Car");
 
+//USER APIs---->>
 const createBooking = async (req, res) => {
   try {
     const { carId, startDate, endDate } = req.body;
@@ -130,6 +131,8 @@ const getUserBookings = async (req, res) => {
   }
 };
 
+
+//OWNER APIs---->>
 const getOwnerBookings = async (req, res) => {
   try {
     const ownerId = req.user._id;
@@ -154,8 +157,107 @@ const getOwnerBookings = async (req, res) => {
   }
 };
 
+//confirm the booking
+const confirmBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ownerId = req.user._id;
+
+    const booking = await Booking.findById(id);
+
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        message: "Booking not found",
+      });
+    }
+    if (booking.ownerId.toString() !== ownerId) {
+      return res.status(403).json({
+        success: false,
+        message: "Only owner can confirm booking",
+      });
+    }
+
+    if (booking.status !== "pending") {
+      return res.status(400).json({
+        success: false,
+        message: "Only pending bookings can be confirmed",
+      });
+    }
+
+    booking.status = "confirmed";
+    await booking.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Booking confirmed",
+      booking,
+    });
+  } catch (error) {
+    console.error("Confirm booking error:", error.message);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+//cancel the bookings
+const cancelBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user._id;
+
+    const booking = await Booking.findById(id);
+
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        message: "Booking not found",
+      });
+    }
+
+    //check access
+    if (
+      booking.userId.toString() !== userId &&
+      booking.ownerId.toString() !== userId
+    ) {
+      return res.status(403).json({
+        success: false,
+        message: "Not authorized to cancel this booking",
+      });
+    }
+
+    if (booking.status === "completed") {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot cancel completed booking",
+      });
+    }
+
+    booking.status = "cancelled";
+    await booking.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Booking cancelled successfully",
+      booking,
+    });
+  } catch (error) {
+    console.error("Cancel booking error:", error.message);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
 module.exports = {
+  confirmBooking,
   createBooking,
   getUserBookings,
   getOwnerBookings,
+  cancelBooking,
 };

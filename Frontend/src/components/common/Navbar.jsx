@@ -31,6 +31,7 @@ const Navbar = () => {
                         <Link key={el.name ?? i} to={el.path}>{el.name}</Link>
                     ))}
                 </div>
+                
 
                 {/* Desktop Auth */}
                 {
@@ -81,6 +82,7 @@ const Navbar = () => {
                         CarDetails
                     </Link>
                 ) : (
+                    
                     <button className='bg-lime-900 text-white px-6 py-2 rounded-full w-fit'>
                         Login
                     </button>

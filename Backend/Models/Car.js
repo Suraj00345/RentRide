@@ -7,7 +7,15 @@ const carSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-
+    category: {
+      type: "String",
+      required: true,
+    },
+    images: [
+      {
+        type: String,
+      },
+    ],
     carName: {
       type: String,
       required: true,
@@ -23,6 +31,14 @@ const carSchema = new mongoose.Schema(
       required: true,
       lowercase: true,
       trim: true,
+    },
+    seats: {
+      type: String,
+      required: true,
+    },
+    fuel: {
+      type: String,
+      required: true,
     },
     pricePerDay: {
       type: Number,
