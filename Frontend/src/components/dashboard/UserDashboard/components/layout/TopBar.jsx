@@ -1,0 +1,27 @@
+import { PAGE_TITLES } from "../../constants";
+
+const TopBar = ({ activeNav, onMenuOpen, userName }) => (
+  <header className="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
+    <div className="flex items-center gap-3">
+      <button className="lg:hidden text-gray-500 hover:text-gray-800" onClick={onMenuOpen}>
+        ☰
+      </button>
+      <div>
+        <h1 className="text-lg font-bold text-gray-900">{PAGE_TITLES[activeNav] ?? "Dashboard"}</h1>
+        <p className="text-xs text-gray-400">Welcome back, {userName.split(" ")[0]} 👋</p>
+      </div>
+    </div>
+
+    <div className="flex items-center gap-3">
+      <button className="relative p-2 rounded-xl hover:bg-gray-50 text-gray-500 transition">
+        <span className="text-lg">🔔</span>
+        <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-green-500 rounded-full" />
+      </button>
+      <button className="hidden sm:flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors">
+        + Book a Car
+      </button>
+    </div>
+  </header>
+);
+
+export default TopBar;

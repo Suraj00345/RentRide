@@ -242,7 +242,7 @@ const getCars = async (req, res) => {
   }
 };
 
-//car details
+//Car details
 const getCarDetails = async (req, res) => {
   try {
     const { id } = req.params;
