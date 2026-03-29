@@ -8,10 +8,11 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navElements = [
-    { name: "Explore", path: "/" },
-    { name: "Trips", path: "/" },
-    { name: "About Us", path: "/" },
-    { name: "Message", path: "/" },
+    { name: "Home", path: "/" },
+    { name: "Vehicles", path: "/vehicles" },
+    { name: "Details", path: "/details" },
+    { name: "About Us", path: "/about-us" },
+    { name: "Contact Us", path: "/contact_us" },
   ];
 
   return (
@@ -71,13 +72,19 @@ const Navbar = () => {
                     }`}
       >
         <Link to="/" onClick={() => setMenuOpen(false)}>
-          Explore
+          Home
         </Link>
         <Link to="/" onClick={() => setMenuOpen(false)}>
-          Trips
+          Vehicles
+        </Link>
+        <Link to="/" onClick={() => setMenuOpen(false)}>
+          Details
         </Link>
         <Link to="/" onClick={() => setMenuOpen(false)}>
           About Us
+        </Link>
+        <Link to="/" onClick={() => setMenuOpen(false)}>
+          Contact Us
         </Link>
 
         {user ? (
