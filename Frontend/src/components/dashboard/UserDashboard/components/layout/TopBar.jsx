@@ -1,7 +1,7 @@
 import { PAGE_TITLES } from "../../constants";
 
 const TopBar = ({ activeNav, onMenuOpen, userName }) => (
-  <header className="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
+  <header className="bg-white border-b mt-1 border-gray-100 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
     <div className="flex items-center gap-3">
       <button className="lg:hidden text-gray-500 hover:text-gray-800" onClick={onMenuOpen}>
         ☰

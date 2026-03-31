@@ -1,59 +1,68 @@
 import { useState } from "react";
-import Sidebar              from "./components/layout/Sidebar";
-import TopBar               from "./components/layout/TopBar";
-import OverviewPage         from "./components/Pages/OverviewPage";
-import OwnerApprovalsPage   from "./components/Pages/OwnerApprovalPage";
-import CarApprovalsPage     from "./components/Pages/CarApprovalsPage";
-import ManageUsersPage      from "./components/Pages/ManageUsersPage";
-import RevenuePage          from "./components/Pages/RevenuePage";
-import TransactionsPage     from "./components/Pages/TransactionsPage";
-import PlaceholderPage      from "./components/Pages/PlaceholderPage";
+import Sidebar from "./components/layout/Sidebar";
+import TopBar from "./components/layout/TopBar";
+import OverviewPage from "./components/Pages/OverviewPage";
+import OwnerApprovalsPage from "./components/Pages/OwnerApprovalPage";
+import CarApprovalsPage from "./components/Pages/CarApprovalsPage";
+import ManageUsersPage from "./components/Pages/ManageUsersPage";
+import RevenuePage from "./components/Pages/RevenuePage";
+import TransactionsPage from "./components/Pages/TransactionsPage";
+import PlaceholderPage from "./components/Pages/PlaceholderPage";
 import {
   pendingOwners as initialOwners,
-  pendingCars   as initialCars,
-  allUsers       as initialUsers,
+  pendingCars as initialCars,
+  allUsers as initialUsers,
   revenueData,
 } from "./data";
 
 // ─── Derived platform stats ────────────────────────────────
-const totalRevenue     = revenueData.reduce((s, d) => s + d.revenue, 0);
-const totalCommission  = revenueData.reduce((s, d) => s + d.commission, 0);
-const totalBookings    = revenueData.reduce((s, d) => s + d.bookings, 0);
+const totalRevenue = revenueData.reduce((s, d) => s + d.revenue, 0);
+const totalCommission = revenueData.reduce((s, d) => s + d.commission, 0);
+const totalBookings = revenueData.reduce((s, d) => s + d.bookings, 0);
 
 export default function AdminDashboard() {
-  const [activeNav,   setActiveNav]   = useState("overview");
+  const [activeNav, setActiveNav] = useState("overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [owners,      setOwners]      = useState(initialOwners);
-  const [cars,        setCars]        = useState(initialCars);
-  const [users,       setUsers]       = useState(initialUsers);
+  const [owners, setOwners] = useState(initialOwners);
+  const [cars, setCars] = useState(initialCars);
+  const [users, setUsers] = useState(initialUsers);
 
   // ─── Approval handlers ──────────────────────────────────
   const handleOwnerApprove = (id) =>
-    setOwners((prev) => prev.map((o) => o.id === id ? { ...o, status: "approved" } : o));
-  const handleOwnerReject  = (id) =>
-    setOwners((prev) => prev.map((o) => o.id === id ? { ...o, status: "rejected" } : o));
+    setOwners((prev) =>
+      prev.map((o) => (o.id === id ? { ...o, status: "approved" } : o)),
+    );
+  const handleOwnerReject = (id) =>
+    setOwners((prev) =>
+      prev.map((o) => (o.id === id ? { ...o, status: "rejected" } : o)),
+    );
 
-  const handleCarApprove   = (id) =>
-    setCars((prev) => prev.map((c) => c.id === id ? { ...c, status: "approved" } : c));
-  const handleCarReject    = (id) =>
-    setCars((prev) => prev.map((c) => c.id === id ? { ...c, status: "rejected" } : c));
+  const handleCarApprove = (id) =>
+    setCars((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, status: "approved" } : c)),
+    );
+  const handleCarReject = (id) =>
+    setCars((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, status: "rejected" } : c)),
+    );
 
-  const handleToggleBan    = (id) =>
+  const handleToggleBan = (id) =>
     setUsers((prev) =>
-      prev.map((u) => u.id === id
-        ? { ...u, status: u.status === "active" ? "banned" : "active" }
-        : u
-      )
+      prev.map((u) =>
+        u.id === id
+          ? { ...u, status: u.status === "active" ? "banned" : "active" }
+          : u,
+      ),
     );
 
   // ─── Counts for sidebar badges ──────────────────────────
   const pendingOwnerCount = owners.filter((o) => o.status === "pending").length;
-  const pendingCarCount   = cars.filter((c)   => c.status === "pending").length;
-  const totalPending      = pendingOwnerCount + pendingCarCount;
+  const pendingCarCount = cars.filter((c) => c.status === "pending").length;
+  const totalPending = pendingOwnerCount + pendingCarCount;
 
   const pendingCounts = {
     owners: pendingOwnerCount,
-    cars:   pendingCarCount,
+    cars: pendingCarCount,
   };
 
   // ─── Stats object for child pages ───────────────────────
@@ -61,17 +70,19 @@ export default function AdminDashboard() {
     totalRevenue,
     totalCommission,
     totalBookings,
-    activeUsers:   users.filter((u) => u.status === "active").length,
-    activeCars:    cars.filter((c) => c.status === "approved").length,
-    activeOwners:  owners.filter((o) => o.status === "approved").length,
+    activeUsers: users.filter((u) => u.status === "active").length,
+    activeCars: cars.filter((c) => c.status === "approved").length,
+    activeOwners: owners.filter((o) => o.status === "approved").length,
     pendingOwners: pendingOwnerCount,
-    pendingCars:   pendingCarCount,
+    pendingCars: pendingCarCount,
   };
 
   return (
     <div className="min-h-screen bg-gray-50 flex font-sans">
       {/* Sidebar */}
-      <div className={`${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 transition-transform duration-300`}>
+      <div
+        className={`${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 transition-transform duration-300`}
+      >
         <Sidebar
           activeNav={activeNav}
           onNavChange={setActiveNav}
@@ -82,8 +93,10 @@ export default function AdminDashboard() {
 
       {/* Mobile overlay */}
       {sidebarOpen && (
-        <div className="fixed inset-0 bg-black/30 z-20 lg:hidden"
-          onClick={() => setSidebarOpen(false)} />
+        <div
+          className="fixed inset-0 bg-black/30 z-20 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
       )}
 
       {/* Main */}
@@ -115,15 +128,9 @@ export default function AdminDashboard() {
           {activeNav === "users" && (
             <ManageUsersPage users={users} onToggleBan={handleToggleBan} />
           )}
-          {activeNav === "revenue" && (
-            <RevenuePage stats={stats} />
-          )}
-          {activeNav === "transactions" && (
-            <TransactionsPage />
-          )}
-          {activeNav === "settings" && (
-            <PlaceholderPage page="settings" />
-          )}
+          {activeNav === "revenue" && <RevenuePage stats={stats} />}
+          {activeNav === "transactions" && <TransactionsPage />}
+          {activeNav === "settings" && <PlaceholderPage page="settings" />}
         </main>
       </div>
     </div>

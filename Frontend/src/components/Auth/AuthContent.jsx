@@ -13,7 +13,7 @@ const AuthContent = () => {
 
       {/* 1. Top Section: Logo */}
       <div className="relative z-10">
-        <Logo className="h-8 w-auto" />
+        <Logo className="h-8" />
       </div>
 
       {/* 2. Middle Section: Hero Text */}

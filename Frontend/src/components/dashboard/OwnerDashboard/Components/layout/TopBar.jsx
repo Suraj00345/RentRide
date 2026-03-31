@@ -1,14 +1,14 @@
 const pageTitles = {
   dashboard: "Dashboard Overview",
-  cars:      "My Listed Cars",
-  orders:    "Rental Orders",
-  earnings:  "Earnings",
-  reviews:   "Reviews",
-  settings:  "Settings",
+  cars: "My Listed Cars",
+  orders: "Rental Orders",
+  earnings: "Earnings",
+  reviews: "Reviews",
+  settings: "Settings",
 };
 
 const TopBar = ({ activeNav, onMenuOpen }) => (
-  <header className="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
+  <header className="bg-white border-b mt-1 border-gray-100 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
     <div className="flex items-center gap-3">
       <button
         className="lg:hidden text-gray-500 hover:text-gray-800"

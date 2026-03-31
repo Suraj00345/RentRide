@@ -1,18 +1,15 @@
 import { navItems } from "../../Constant/index";
+import Logo from "../../../../common/Logo";
 
 const SideBar = ({ activeNav, onNavChange, onClose, pendingCount }) => (
   <aside className="fixed z-30 inset-y-0 left-0 w-64 bg-white border-r border-gray-100 flex flex-col lg:translate-x-0 lg:static">
-    {/* Logo */}
-    <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-100">
-      <div className="w-9 h-9 rounded-xl bg-green-600 flex items-center justify-center">
-        <span className="text-white text-lg">🚘</span>
-      </div>
-      <div>
-        <p className="font-bold text-gray-900 text-sm leading-tight">
-          DriveEase
-        </p>
-        <p className="text-xs text-gray-400">Owner Portal</p>
-      </div>
+   {/* Logo */}
+    <div className="items-center gap-4 mt-2 px-auto border-b border-gray-100 bg-white">
+      {/* Logo Component */}
+      <Logo className="h-5 w-auto" />
+
+      {/* Vertical Divider (Optional, adds a premium feel) */}
+      <div className="h-6 w-px bg-gray-200" aria-hidden="true" />
     </div>
 
     {/* Nav links */}

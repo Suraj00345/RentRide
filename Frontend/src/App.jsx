@@ -6,18 +6,24 @@ import Login from "./pages/Login";
 import UserDashboard from "./components/dashboard/UserDashboard/userDashboard";
 import OwnerDashboard from "./components/dashboard/OwnerDashboard/ownerDashboard";
 import AdminDashboard from "./components/dashboard/AdminDashboard/adminDashboard";
+import Vehicles from "./pages/Vehicles";
+import CarDetails from "./pages/CarDetails";
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      {/* <Route path='/' element={<Home />} /> */}
-      {/* <Route path='/' element={<OwnerDashboard/>} /> */}
-      {/* <Route path='/carDetails' element={<CarDetails />} /> */}
-      {/* <Route path='/' element={<UserDashboard />} />  */}
-      {/* <Route path="/" element={<AdminDashboard />} /> */}
+      <Route path="/" element={<Home />} />
+      <Route path="/vehicles" element={<Vehicles />} />
+      <Route path="/carDetails" element={<CarDetails />} />
+      <Route path="/aboutUs" element={<AboutUs />} />
+      <Route path="/contactUs" element={<ContactUs />} />
+      <Route path="/ownerDashboard" element={<OwnerDashboard />} />
+      <Route path="/userDashboard" element={<UserDashboard />} />
+      <Route path="/adminDashboard" element={<AdminDashboard />} />
     </Routes>
   );
 }

@@ -4,15 +4,15 @@ import Logo from "./Logo";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const user = null;
+  const user = { name: "Suraj", role: "user" };
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navElements = [
     { name: "Home", path: "/" },
     { name: "Vehicles", path: "/vehicles" },
-    { name: "Details", path: "/details" },
-    { name: "About Us", path: "/about-us" },
-    { name: "Contact Us", path: "/contact_us" },
+    { name: "Details", path: "/carDetails" },
+    { name: "About Us", path: "/aboutUs" },
+    { name: "Contact Us", path: "/contactUs" },
   ];
 
   return (
@@ -35,7 +35,7 @@ const Navbar = () => {
             <div className="hidden md:flex items-center gap-3">
               <Link
                 className="bg-lime-900 text-white px-9 py-2 rounded-full"
-                to="/Dashboard"
+                to={`/${user.role}Dashboard`}
               >
                 Access Dashboard
               </Link>

@@ -1,16 +1,15 @@
+import Logo from "../../../../common/Logo";
 import { navItems } from "../../constants";
 
 const Sidebar = ({ activeNav, onNavChange, onClose, pendingCounts }) => (
   <aside className="fixed z-30 inset-y-0 left-0 w-64 bg-white border-r border-gray-100 flex flex-col lg:translate-x-0 lg:static">
     {/* Logo */}
-    <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-100">
-      <div className="w-9 h-9 rounded-xl bg-green-600 flex items-center justify-center">
-        <span className="text-white text-lg">🚘</span>
-      </div>
-      <div>
-        <p className="font-bold text-gray-900 text-sm leading-tight">RentRide</p>
-        <p className="text-xs text-red-500 font-semibold">Admin Panel</p>
-      </div>
+    <div className="items-center gap-4 mt-2 px-auto border-b border-gray-100 bg-white">
+      {/* Logo Component */}
+      <Logo className="h-5 w-auto" />
+
+      {/* Vertical Divider (Optional, adds a premium feel) */}
+      <div className="h-6 w-px bg-gray-200" aria-hidden="true" />
     </div>
 
     {/* Nav */}
@@ -20,7 +19,10 @@ const Sidebar = ({ activeNav, onNavChange, onClose, pendingCounts }) => (
         return (
           <button
             key={item.id}
-            onClick={() => { onNavChange(item.id); onClose(); }}
+            onClick={() => {
+              onNavChange(item.id);
+              onClose();
+            }}
             className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
               activeNav === item.id
                 ? "bg-green-50 text-green-700"
@@ -46,7 +48,9 @@ const Sidebar = ({ activeNav, onNavChange, onClose, pendingCounts }) => (
           AD
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-gray-900 truncate">Admin User</p>
+          <p className="text-sm font-semibold text-gray-900 truncate">
+            Admin User
+          </p>
           <p className="text-xs text-red-500 font-semibold">Super Admin</p>
         </div>
       </div>

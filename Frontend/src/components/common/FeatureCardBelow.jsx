@@ -3,7 +3,7 @@ import AppleAPPStore from "../../assets/AppleAppStore.png";
 import GAppStore from "../../assets/GAppStore.png";
 import Phone from "../../assets/googleAppstorePhone.png";
 import Vector from "../../assets/Vector.png";
-import Logo from "./Logo";
+
 
 const StatCard = ({ icon: Icon, value, label }) => (
   <div className="bg-white rounded-xl p-4 flex items-center gap-4 min-w-[200px] shadow-lg">
