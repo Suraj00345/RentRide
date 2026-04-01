@@ -1,5 +1,5 @@
 export const userProfile = {
-  name: "Arjun Sharma",
+  name: localStorage.getItem("username"),
   avatar: "AS",
   email: "arjun.sharma@email.com",
   phone: "+91 98765 43210",
@@ -143,7 +143,34 @@ export const monthlySpendData = [
 ];
 
 export const savedCars = [
-  { id: 1, car: "BMW 3 Series 2024", carImage: "🚗", category: "Sedan",    price: 6500, location: "New Delhi", rating: 4.9, owner: "Vikram Singh" },
-  { id: 2, car: "Jeep Compass 2024", carImage: "🚙", category: "SUV",      price: 4800, location: "Mumbai",    rating: 4.7, owner: "Divya Rao" },
-  { id: 3, car: "Skoda Slavia 2023", carImage: "🚗", category: "Sedan",    price: 3100, location: "Bangalore", rating: 4.6, owner: "Raj Nair" },
+  {
+    id: 1,
+    car: "BMW 3 Series 2024",
+    carImage: "🚗",
+    category: "Sedan",
+    price: 6500,
+    location: "New Delhi",
+    rating: 4.9,
+    owner: "Vikram Singh",
+  },
+  {
+    id: 2,
+    car: "Jeep Compass 2024",
+    carImage: "🚙",
+    category: "SUV",
+    price: 4800,
+    location: "Mumbai",
+    rating: 4.7,
+    owner: "Divya Rao",
+  },
+  {
+    id: 3,
+    car: "Skoda Slavia 2023",
+    carImage: "🚗",
+    category: "Sedan",
+    price: 3100,
+    location: "Bangalore",
+    rating: 4.6,
+    owner: "Raj Nair",
+  },
 ];

@@ -1,5 +1,5 @@
-import { Star, CheckCircle2, Quote } from "lucide-react";
 import React from "react";
+import { Star, CheckCircle2, Quote } from "lucide-react";
 import Logo from "../common/Logo";
 
 const AuthContent = () => {
@@ -32,14 +32,19 @@ const AuthContent = () => {
             entirely hassle-free.
           </span>
         </h2>
-        
+
         <p className="text-slate-400 text-lg leading-relaxed mb-8">
-          Choose from thousands of premium cars. Book in under 60 seconds and hit the road with 24/7 concierge support.
+          Choose from thousands of premium cars. Book in under 60 seconds and
+          hit the road with 24/7 concierge support.
         </p>
 
         {/* Feature List */}
         <ul className="space-y-4">
-          {["Easy instant booking", "Zero hidden maintenance fees", "Flexible free cancellation"].map((item) => (
+          {[
+            "Easy instant booking",
+            "Zero hidden maintenance fees",
+            "Flexible free cancellation",
+          ].map((item) => (
             <li key={item} className="flex items-center gap-3 text-slate-300">
               <CheckCircle2 className="w-5 h-5 text-emerald-500" />
               <span className="text-sm font-medium">{item}</span>
@@ -53,9 +58,10 @@ const AuthContent = () => {
         <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-2xl">
           <Quote className="w-8 h-8 text-emerald-500/40 mb-4" />
           <p className="text-slate-200 text-lg font-medium leading-snug mb-6">
-            "The easiest car rental experience I've ever had. The app is intuitive and the cars are always in pristine condition."
+            "The easiest car rental experience I've ever had. The app is
+            intuitive and the cars are always in pristine condition."
           </p>
-          
+
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-full ring-2 ring-emerald-500/20 overflow-hidden bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-white font-bold">
@@ -66,14 +72,19 @@ const AuthContent = () => {
                 <p className="text-slate-500 text-xs">Verified Traveler</p>
               </div>
             </div>
-            
+
             <div className="flex flex-col items-end">
               <div className="flex gap-0.5 mb-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-emerald-400 fill-emerald-400" />
+                  <Star
+                    key={i}
+                    className="w-4 h-4 text-emerald-400 fill-emerald-400"
+                  />
                 ))}
               </div>
-              <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">5.0 Rating</span>
+              <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">
+                5.0 Rating
+              </span>
             </div>
           </div>
         </div>

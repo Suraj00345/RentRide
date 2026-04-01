@@ -4,7 +4,7 @@ import { create } from "zustand";
 export const useAdminStore = create((set) => ({
   // optimistic status overrides before server confirms
   ownerStatuses: {}, // { [ownerId]: "approved" | "rejected" }
-  carStatuses:   {}, // { [carId]:   "approved" | "rejected" }
+  carStatuses: {}, // { [carId]:   "approved" | "rejected" }
 
   setOwnerStatus: (id, status) =>
     set((state) => ({

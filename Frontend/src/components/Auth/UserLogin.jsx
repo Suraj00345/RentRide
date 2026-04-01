@@ -1,94 +1,141 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { Eye, EyeOff, User, ShieldCheck, Briefcase } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import { loginUser } from "../../services/authApi";
 
 const UserLogin = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [userData, setUserData] = useState({
+  // --- CONSOLIDATED STATE ---
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
+    role: "user",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  // --- MUTATION ---
+  const loginMutation = useMutation({
+    mutationFn: loginUser,
+    onSuccess: (data) => {
+      //  console.log(data);
+
+      localStorage.setItem("token", data.jwtToken);
+      localStorage.setItem(
+        "username",
+        `${data.user.firstname} ${data.user.lastname}`,
+      );
+      localStorage.setItem("role", data.user.role);
+      toast.success("Login successful!", { duration: 1500 });
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    },
+    onError: (error) => {
+      const errorMsg = error?.response?.data?.message || "Login failed.";
+      toast.error(errorMsg);
+    },
+  });
+
+  // --- GENERIC INPUT HANDLER (CORRECTED) ---
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleVisiblePassword = () => setShowPassword((prev) => !prev);
 
   const handleLoginFormSubmit = (e) => {
     e.preventDefault();
-
-    setUserData({
-      email: email,
-      password: password,
-    });
-    setEmail("");
-    setPassword("");
-    toast.success("User loggin successfull", { duration: 1500 });
-
-    setTimeout(() => {
-      navigate("/");
-    }, timeout);
+    if (!formData.email || !formData.password) {
+      return toast.error("Please fill in all fields");
+    }
+    loginMutation.mutate(formData);
   };
 
   return (
-    <div
-      className="flex flex-1 items-center justify-center bg-gradient-to-b from-[#4490cf]/35 via-white/30 to-[#c8f53f]/35
-      px-6 py-12 md:px-12 lg:px-20"
-    >
-      <div className="w-full max-w-sm bg-white p-10 rounded-3xl shadow-[0_0_0_1px_rgba(0,0,0,0.06),0_20px_40px_rgba(0,0,0,0.10)]">
-        <div className="inline-flex items-center gap-2 bg-[#f0f9e8] border border-[#c8f53f] rounded-full px-3 py-1 mb-5">
-          <div className="w-2 h-2 rounded-full bg-[#c8f53f]" />
-          <span className="text-xs font-semibold text-[#4a7c10]">
-            Secure Login
-          </span>
-        </div>
+    <div className="flex flex-1 items-center justify-center bg-gradient-to-b from-[#4490cf]/35 via-white/30 to-[#c8f53f]/35 px-6 py-12 min-h-screen">
+      <Toaster position="top-center" />
+      <div className="w-full max-w-sm bg-white p-10 rounded-3xl shadow-[0_20px_40px_rgba(0,0,0,0.10)]">
         <h1 className="text-2xl font-bold text-slate-900 mb-1">Welcome back</h1>
-        <p className="text-sm text-slate-500 mb-8">
-          Sign in to your account to continue
-        </p>
+        <p className="text-sm text-slate-500 mb-6">Sign in to your account</p>
 
-        <form
-          onSubmit={(e) => handleLoginFormSubmit(e)}
-          className="flex flex-col gap-4"
-        >
+        <form onSubmit={handleLoginFormSubmit} className="flex flex-col gap-4">
+          {/* Role Selection */}
+          <div className="flex bg-slate-50 p-1 rounded-xl border border-slate-100 mb-2">
+            {[
+              { id: "user", label: "User", icon: User },
+              { id: "owner", label: "Owner", icon: Briefcase },
+              { id: "admin", label: "Admin", icon: ShieldCheck },
+            ].map((r) => (
+              <label
+                key={r.id}
+                className={`flex-1 flex items-center justify-center gap-2 py-2 px-1 rounded-lg cursor-pointer transition-all text-xs font-medium ${
+                  formData.role === r.id
+                    ? "bg-white text-[#4490cf] shadow-sm ring-1 ring-black/5"
+                    : "text-slate-500 hover:text-slate-700"
+                }`}
+              >
+                <input
+                  type="radio"
+                  className="hidden"
+                  name="role"
+                  value={r.id}
+                  checked={formData.role === r.id}
+                  onChange={handleChange} // Pass the event directly
+                />
+                <r.icon size={14} />
+                {r.label}
+              </label>
+            ))}
+          </div>
+
+          {/* Email */}
           <div>
             <label className="block text-xs font-medium text-slate-700 mb-1">
               Email address
             </label>
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              required
+              value={formData.email}
+              onChange={handleChange} // Pass the event directly
               placeholder="you@example.com"
-              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm
-                           focus:outline-none focus:ring-2 focus:ring-slate-900 transition"
+              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#4490cf] outline-none transition"
             />
           </div>
 
+          {/* Password */}
           <div>
             <div className="flex justify-between items-center mb-1">
               <label className="text-xs font-medium text-slate-700">
                 Password
               </label>
-              <a href="#" className="text-xs text-indigo-600 hover:underline">
+              <Link
+                to="/forgot-password"
+                className="text-xs text-indigo-600 hover:underline"
+              >
                 Forgot password?
-              </a>
+              </Link>
             </div>
-
-            {/* password */}
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                required
+                value={formData.password}
+                onChange={handleChange} // Pass the event directly
                 placeholder="••••••••"
-                className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm
-                           focus:outline-none focus:ring-2 focus:ring-slate-900 transition"
+                className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#4490cf] outline-none transition"
               />
-
               <button
                 onClick={handleVisiblePassword}
                 type="button"
@@ -101,31 +148,19 @@ const UserLogin = () => {
 
           <button
             type="submit"
-            className="w-full bg-[#4490cf] text-white rounded-lg py-2.5 text-sm font-semibold
-                         hover:bg-slate-700 active:scale-95 transition mt-1"
+            disabled={loginMutation.isPending}
+            className="w-full bg-[#4490cf] text-white rounded-lg py-2.5 text-sm font-semibold hover:bg-[#3678ad] transition disabled:opacity-70 active:scale-95"
           >
-            Sign in
+            {loginMutation.isPending ? "Signing in..." : "Sign In"}
           </button>
         </form>
 
         <p className="text-xs text-slate-500 text-center mt-6">
           Don't have an account?{" "}
-          <a
-            href="/register"
-            className="text-indigo-600 font-medium hover:underline"
-          >
-            Create one free
-          </a>
+          <Link to="/register" className="text-indigo-600 hover:underline">
+            Create account
+          </Link>
         </p>
-
-        <Link to="/">
-          <button
-            className="w-full bg-lime-900 text-white rounded-lg py-2.5 text-sm font-semibold
-                    hover:bg-slate-700 hover:text-white active:scale-95 transition mt-4"
-          >
-            Sign in as Rider
-          </button>
-        </Link>
       </div>
     </div>
   );

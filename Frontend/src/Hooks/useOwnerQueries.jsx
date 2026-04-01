@@ -2,7 +2,7 @@
 import { usePendingOwners, useApproveOwner, useRejectOwner } from "../../hooks/useAdminQueries";
 import { useAdminStore } from "../../store/useAdminStore";
 
-const OwnerApprovalsPage = () => {
+ const OwnerApprovalsPage = () => {
   const { data: owners = [], isLoading, isError } = usePendingOwners();
   const approveOwner  = useApproveOwner();
   const rejectOwner   = useRejectOwner();

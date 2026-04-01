@@ -5,7 +5,7 @@ const UserModel = require("../Models/User");
 // Handle New User Registration
 const Register = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { firstname, lastname, email, password, role } = req.body;
 
     // Check if user already exists to prevent duplicate accounts
     const user = await UserModel.findOne({ email });
@@ -17,7 +17,7 @@ const Register = async (req, res) => {
     }
 
     // Create a new instance of the User model
-    const userModel = new UserModel({ name, email, password, role });
+    const userModel = new UserModel({ firstname, lastname, email, password, role });
 
     // Hash the password before saving (10 rounds of salt)
     userModel.password = await bcrypt.hash(password, 10);
@@ -80,7 +80,8 @@ const Login = async (req, res) => {
       jwtToken,
       user: {
         id: user._id,
-        name: user.name,
+        firstname: user.firstname,
+        lastname: user.lastname,
         email: user.email,
         role: user.role,
       },

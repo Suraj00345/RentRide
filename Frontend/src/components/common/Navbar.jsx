@@ -4,7 +4,11 @@ import Logo from "./Logo";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const user = { name: "Suraj", role: "user" };
+  const user = {
+    name: localStorage.getItem("username"),
+    role: localStorage.getItem("role"),
+  };
+  // const user = null;
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navElements = [

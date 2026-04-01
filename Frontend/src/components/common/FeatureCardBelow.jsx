@@ -4,7 +4,6 @@ import GAppStore from "../../assets/GAppStore.png";
 import Phone from "../../assets/googleAppstorePhone.png";
 import Vector from "../../assets/Vector.png";
 
-
 const StatCard = ({ icon: Icon, value, label }) => (
   <div className="bg-white rounded-xl p-4 flex items-center gap-4 min-w-[200px] shadow-lg">
     <div className="bg-yellow-500 p-3 rounded-lg text-white">
@@ -31,7 +30,7 @@ const FeatureCardBelow = () => {
   return (
     <div>
       <section className="p-10 flex items-center justify-center">
-        <div className="relative w-full max-w-7xl bg-lime-800 rounded-[2rem] p-12 overflow-hidden text-center">
+        <div className="relative w-full max-w-7xl bg-gradient-to-r from-lime-600 to-green-800 rounded-[2rem] p-12 overflow-hidden text-center">
           {/* Subtle Background Decoration (Simplified tire track effect) */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
             <div className="absolute -bottom-10 -left-10 w-64 h-64 border-[20px] border-white rounded-full border-dashed rotate-12" />
@@ -91,8 +90,8 @@ const FeatureCardBelow = () => {
       </section>
 
       {/* --- Hero / Search Section --- */}
-      <section className="max-w-7xl mb-10 mx-auto bg-lime-800 rounded-3xl p-12 relative overflow-hidden">
-        {/* Decorative Tire Tracks (Simulated) */}
+      <section className="max-w-7xl mb-10 mx-auto bg-gradient-to-r from-lime-700 to-green-800 rounded-3xl p-12 relative overflow-hidden">
+        {/* Decorative Tire Tracks (Simulated) */} 
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute top-0 w-full h-full rotate-12 scale-150 border-y-[40px] border-dashed border-black" />
         </div>

@@ -12,9 +12,9 @@ const Home = () => {
     <>
       <Navbar />
       <Hero />
-      <FeaturesSection/>
+      <FeaturesSection />
       <FeaturedCars />
-      <FeatureCardBelow/>
+      <FeatureCardBelow />
       <Testimonials />
       <Footer />
     </>
