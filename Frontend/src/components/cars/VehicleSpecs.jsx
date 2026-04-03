@@ -19,8 +19,8 @@ const VehicleSpecs = ({ car }) => {
   };
 
   return (
-    <div className="w-screen mx-auto p-6 bg-white min-h-screen ">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-23 max-w-6xl mx-auto">
+    <div className="w-screen mx-auto p-13 bg-white min-h-auto ">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-23 max-w-7xl mx-auto">
         {/* Left Column: Visuals */}
         <div>
           <div className="mb-6">

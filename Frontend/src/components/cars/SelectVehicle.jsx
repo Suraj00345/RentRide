@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import VehicleCard from "./VehicleCard";
-import CarLogo from "../common/CarLogo";
 
 export const CAR_DATA = [
   {

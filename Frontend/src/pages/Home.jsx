@@ -9,7 +9,7 @@ import FeatureCardBelow from "../components/common/FeatureCardBelow";
 
 const Home = () => {
   return (
-    <>
+    <div className="bg-white">
       <Navbar />
       <Hero />
       <FeaturesSection />
@@ -17,7 +17,7 @@ const Home = () => {
       <FeatureCardBelow />
       <Testimonials />
       <Footer />
-    </>
+    </div>
   );
 };
 

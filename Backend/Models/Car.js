@@ -7,15 +7,6 @@ const carSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    category: {
-      type: "String",
-      required: true,
-    },
-    images: [
-      {
-        type: String,
-      },
-    ],
     carName: {
       type: String,
       required: true,
@@ -26,26 +17,63 @@ const carSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    plate_no: {
+      type: String,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
     city: {
       type: String,
       required: true,
       lowercase: true,
       trim: true,
     },
-    seats: {
-      type: String,
-      required: true,
-    },
-    fuel: {
-      type: String,
-      required: true,
-    },
     pricePerDay: {
       type: Number,
       required: true,
     },
-    description: {
+    images: [
+      {
+        type: String,
+      },
+    ],
+    trips: {
       type: String,
+    },
+    description: {
+      ABS: {
+        type: Boolean,
+      },
+      Cruise_Control: {
+        type: Boolean,
+      },
+      Air_Bags: {
+        type: String,
+      },
+      Air_conditioner: {
+        type: Boolean,
+      },
+      Automatic_window: {
+        type: Boolean,
+      },
+      fuel: {
+        type: String,
+      },
+      seats: {
+        type: String,
+      },
+      transmission: {
+        type: String,
+      },
+      totalKM: {
+        type: String,
+      },
+      rating: {
+        type: String,
+      },
     },
     isAvailable: {
       type: Boolean,

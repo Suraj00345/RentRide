@@ -1,8 +1,10 @@
 // src/components/pages/OwnerApprovalsPage.jsx
+import { useQuery } from "@tanstack/react-query";
+import { fetchOwnerCars } from "../services/ownerApi";
 import { usePendingOwners, useApproveOwner, useRejectOwner } from "../../hooks/useAdminQueries";
 import { useAdminStore } from "../../store/useAdminStore";
 
- const OwnerApprovalsPage = () => {
+ export const OwnerApprovalsPage = () => {
   const { data: owners = [], isLoading, isError } = usePendingOwners();
   const approveOwner  = useApproveOwner();
   const rejectOwner   = useRejectOwner();
@@ -25,3 +27,4 @@ import { useAdminStore } from "../../store/useAdminStore";
     />
   );
 };
+

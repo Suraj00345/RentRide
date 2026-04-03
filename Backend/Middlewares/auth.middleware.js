@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const ensureAuthenticated = (req, res, next) => {
+  console.log("🔥 roleMiddleware HIT");
   const auth = req.headers["authorization"];
   if (!auth) {
     return res
@@ -10,8 +11,9 @@ const ensureAuthenticated = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(auth, process.env.JWT_SECRET);
-    req.user = decoded;
     // console.log(decoded);
+    req.userId = decoded._id; // this is user id
+    req.user = decoded; //this is the whole user
     next();
   } catch (err) {
     return res

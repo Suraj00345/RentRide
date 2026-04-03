@@ -9,7 +9,7 @@ const OtherCars = () => {
 
   return (
     <section className="bg-white py-12 px-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="flex justify-between items-end mb-8">
           <h2 className="text-3xl font-black text-gray-900">Other cars</h2>

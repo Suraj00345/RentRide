@@ -2,7 +2,7 @@ import { useState } from "react";
 import TopBar from "../OwnerDashboard/Components/layout/TopBar";
 import Sidebars from "../OwnerDashboard/Components/layout/SideBar";
 import DashboardPage from "../OwnerDashboard/Components/Pages/DashboardPage";
-import CarsPage from "../OwnerDashboard/components/pages/CarsPage";
+import CarsPage from "../OwnerDashboard/components/Pages/CarsPage";
 import OrdersPage from "../OwnerDashboard/components/pages/OrdersPage";
 import EarningsPage from "../OwnerDashboard/components/pages/EarningsPage";
 import PlaceholderPage from "../OwnerDashboard/components/pages/PlaceholderPage";

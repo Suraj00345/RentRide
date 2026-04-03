@@ -107,7 +107,6 @@ const createBooking = async (req, res) => {
     });
   }
 };
-
 const getUserBookings = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -156,7 +155,6 @@ const getOwnerBookings = async (req, res) => {
     });
   }
 };
-
 //confirm the booking
 const confirmBooking = async (req, res) => {
   try {
@@ -202,7 +200,6 @@ const confirmBooking = async (req, res) => {
     });
   }
 };
-
 //cancel the bookings
 const cancelBooking = async (req, res) => {
   try {

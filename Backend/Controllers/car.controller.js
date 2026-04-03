@@ -4,8 +4,10 @@ const mongoose = require("mongoose");
 
 //OWNER SIDE APIS---->>
 const createCar = async (req, res) => {
+  // console.log("userid",req.userId);
+
   try {
-    const { carName, brand, city, pricePerDay, description } = req.body;
+    const { carName, brand, plate_no, category, city, pricePerDay } = req.body;
 
     if (!carName || !brand || !city || !pricePerDay) {
       return res.status(400).json({
@@ -18,9 +20,10 @@ const createCar = async (req, res) => {
       ownerId: req.user._id,
       carName,
       brand,
+      plate_no,
+      category,
       city,
       pricePerDay,
-      description,
     });
 
     return res.status(201).json({
@@ -29,6 +32,36 @@ const createCar = async (req, res) => {
       car,
     });
   } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+const getOwnerCars = async (req, res) => {
+  try {
+    const ownerId = req.user?._id || req.userId;
+    if (!ownerId) {
+      return res.status(401).json({
+        success: false,
+        message: "User ID not found in request. Authentication failed.",
+      });
+    }
+    console.log("Fetching cars for Owner ID 🐻⚙️:", ownerId);
+
+    const cars = await Car.find({ ownerId: ownerId })
+      .sort({ createdAt: -1 })
+      .lean();
+
+    return res.status(200).json({
+      success: true,
+      count: cars.length,
+      cars,
+    });
+  } catch (error) {
+    console.error("Get owner cars error:", error.message);
+
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -61,24 +94,6 @@ const uploadCarImages = async (req, res) => {
   } catch (error) {
     console.error("Upload image error:", error.message);
 
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
-  }
-};
-
-const getOwnerCar = async (req, res) => {
-  try {
-    const ownerId = req.user._id;
-
-    const cars = (await Car.find({ ownerId })).sort({ createdAt: -1 });
-    return res.status(200).json({
-      success: true,
-      count: cars.length,
-      cars,
-    });
-  } catch (error) {
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -283,6 +298,6 @@ module.exports = {
   getCarDetails,
   editCar,
   deleteCar,
-  getOwnerCar,
-  uploadCarImages
+  getOwnerCars,
+  uploadCarImages,
 };

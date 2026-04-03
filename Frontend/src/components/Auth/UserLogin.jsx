@@ -29,6 +29,7 @@ const UserLogin = () => {
         `${data.user.firstname} ${data.user.lastname}`,
       );
       localStorage.setItem("role", data.user.role);
+      localStorage.setItem("email", data.user.email);
       toast.success("Login successful!", { duration: 1500 });
 
       setTimeout(() => {

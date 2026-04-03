@@ -45,7 +45,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="container 2xl:px-10 mx-auto pt-16 my-10">
+    <div className="container 2xl:px-10 mx-auto pt-30">
       <div className="relative min-h-[60vh] md:min-h-[80vh] mx-2 rounded-xl overflow-hidden">
         {/* 🎯 Carousel Images */}
         {banners.map((img, index) => (
