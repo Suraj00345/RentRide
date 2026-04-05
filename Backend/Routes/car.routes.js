@@ -8,6 +8,7 @@ const {
   getCarDetails, 
   editCar, 
   deleteCar, 
+  toggleCarStatus,
   getOwnerCars, 
   uploadCarImages 
 } = require("../Controllers/car.controller");
@@ -26,5 +27,6 @@ router.post("/addCar", ensureAuthenticated, roleMiddleware(["owner"]), createCar
 router.post("/:id/images", ensureAuthenticated, roleMiddleware(["owner"]), upload.array("images", 5), uploadCarImages);
 router.post("/updateCar/:id", ensureAuthenticated, roleMiddleware(["owner"]), editCar);
 router.delete("/deleteCar/:id", ensureAuthenticated, roleMiddleware(["owner"]), deleteCar);
+router.patch("/updateStatus/:id",ensureAuthenticated,roleMiddleware(["owner"]),toggleCarStatus);
 
 module.exports = router;

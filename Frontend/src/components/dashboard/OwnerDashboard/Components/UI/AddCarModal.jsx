@@ -126,7 +126,8 @@ const AddCarModal = ({ isOpen, onClose, onSubmit, isLoading }) => {
                 <option value="SUV">SUV</option>
                 <option value="Hatchback">Hatchback</option>
                 <option value="Luxury">Luxury</option>
-                <option value="Truck">Truck</option>
+                <option value="Pickup">Pickup</option>
+                <option value="Minivan">Minivan</option>
               </select>
             </div>
 

@@ -112,7 +112,8 @@ const getUserBookings = async (req, res) => {
     const userId = req.user._id;
 
     const bookings = await Booking.find({ userId })
-      .populate("carId", "carName brand city pricePerDay")
+      .populate("carId", "brand carName city plate_no pricePerDay")
+      .populate("ownerId", "firstname lastname")
       .sort({ createdAt: -1 });
 
     return res.status(200).json({
@@ -130,15 +131,14 @@ const getUserBookings = async (req, res) => {
   }
 };
 
-
 //OWNER APIs---->>
 const getOwnerBookings = async (req, res) => {
   try {
     const ownerId = req.user._id;
 
     const bookings = await Booking.find({ ownerId })
-      .populate("carId", "carName brand city pricePerDay")
-      .populate("userId", "name email")
+      .populate("carId", "carName brand city pricePerDay plate_no")
+      .populate("userId", "firstname lastname email")
       .sort({ createdAt: -1 });
 
     return res.status(200).json({
@@ -193,6 +193,44 @@ const confirmBooking = async (req, res) => {
     });
   } catch (error) {
     console.error("Confirm booking error:", error.message);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+//confirm the booking
+const completeBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.userId;
+
+    const booking = await Booking.findById(id);
+
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        message: "Booking not found",
+      });
+    }
+    if (booking.userId.toString() !== userId) {
+      return res.status(403).json({
+        success: false,
+        message: "Only user can complete booking",
+      });
+    }
+
+    booking.status = "completed";
+    await booking.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Booking Completed",
+      booking,
+    });
+  } catch (error) {
+    console.error("complete booking error:", error.message);
 
     return res.status(500).json({
       success: false,
@@ -257,4 +295,5 @@ module.exports = {
   getUserBookings,
   getOwnerBookings,
   cancelBooking,
+  completeBooking,
 };

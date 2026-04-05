@@ -12,7 +12,7 @@ const Hero = () => {
     title: "",
     location: "",
     personRef: "",
-    dropRef: "",
+    priceRef: "",
   });
 
   const [isSearched, setIsSearched] = useState(false);
@@ -20,7 +20,7 @@ const Hero = () => {
   const titleRef = useRef(null);
   const locationRef = useRef(null);
   const personRef = useRef(null);
-  const dropRef = useRef(null);
+  const priceRef = useRef(null);
 
   // 🔁 Auto slide
   useEffect(() => {
@@ -36,7 +36,7 @@ const Hero = () => {
       title: titleRef.current.value,
       location: locationRef.current.value,
       personRef: personRef.current.value,
-      dropRef: dropRef.current.value,
+      priceRef: priceRef.current.value,
     });
 
     setIsSearched(true);
@@ -129,16 +129,12 @@ const Hero = () => {
 
               {/* Date */}
               <div className="flex items-center flex-1 pr-2">
-                <img
-                  className="h-4 sm:h-5 ml-2"
-                  src={assets.date_search}
-                  alt=""
-                />
+                <p className="text-xl text-black ml-2">₹</p>
                 <input
                   type="text"
-                  placeholder="Drop-off date"
+                  placeholder="Enter Your Budget"
                   className="text-sm p-2 outline-none w-full bg-transparent"
-                  ref={dropRef}
+                  ref={priceRef}
                 />
               </div>
 

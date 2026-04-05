@@ -29,7 +29,6 @@ const Navbar = () => {
   const navElements = [
     { name: "Home", path: "/" },
     { name: "Vehicles", path: "/vehicles" },
-    { name: "Details", path: "/carDetails" },
     { name: "About Us", path: "/aboutUs" },
     { name: "Contact Us", path: "/contactUs" },
   ];

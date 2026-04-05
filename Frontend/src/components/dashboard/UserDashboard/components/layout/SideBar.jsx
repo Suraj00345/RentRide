@@ -2,7 +2,7 @@ import { navItems } from "../../constants";
 import Logo from "../../../../common/Logo";
 
 const Sidebar = ({ activeNav, onNavChange, onClose, user }) => (
-  <aside className="fixed z-30 inset-y-0 left-0 w-64 bg-white border-r border-gray-100 flex flex-col lg:translate-x-0 lg:static">
+  <aside className=" fixed z-30 inset-y-0 left-0 w-64 bg-white border-r border-gray-100 flex flex-col lg:translate-x-0 lg:static">
     {/* Logo */}
     <div className="items-center gap-4 mt-2 px-auto border-b border-gray-100 bg-white">
       {/* Logo Component */}

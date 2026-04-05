@@ -37,7 +37,7 @@ export const navItems = [
   { id: "settings",  label: "Settings",      icon: "⚙" },
 ];
 
-export const BOOKING_FILTERS = ["all", "upcoming", "ongoing", "completed", "cancelled"];
+export const BOOKING_FILTERS = ["all", "pending", "completed", "cancelled"];
 
 export const PAGE_TITLES = {
   overview: "My Overview",

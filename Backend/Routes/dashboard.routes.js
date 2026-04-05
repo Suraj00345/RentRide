@@ -5,8 +5,10 @@ const roleMiddleware = require("../Middlewares/role.middleware");
 const getMonthlyEarnings = require("../Controllers/dashboard.controller");
 
 router.get(
-  "/monthlyEarning",
-  ensureAuthenticated,
+  "/earning",
   roleMiddleware(["owner"]),
+  ensureAuthenticated,
   getMonthlyEarnings,
 );
+
+module.exports = router;

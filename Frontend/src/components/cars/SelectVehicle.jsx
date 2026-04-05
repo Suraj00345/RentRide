@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import VehicleCard from "./VehicleCard";
+import axios from "axios";
+import RentRideLoader from "../../utils/Loader";
+import ErrorPage from "../../utils/ErrorPage";
 
 export const CAR_DATA = [
   {
@@ -136,22 +140,57 @@ export const CAR_DATA = [
   },
 ];
 
+// Standard categories to match your UI tabs
 const categories = [
   "All vehicles",
+  "Luxury",
   "Sedan",
-  "Cabriolet",
-  "Pickup",
+  "Hatchback",
   "SUV",
+  "Pickup",
   "Minivan",
 ];
-
 const SelectVehicle = () => {
-  const [activeTab, setActiveTab] = useState("All vehicles");
 
+  const navigate = useNavigate();
+
+  const [activeTab, setActiveTab] = useState("All vehicles");
+  const [cars, setCars] = useState([]); 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        // Added a check to ensure BASE_URL doesn't end with double slashes if the string already has one
+        const response = await axios.get(`${BASE_URL}car`);
+
+        if (response.data && response.data.cars) {
+          setCars(response.data.cars);
+        } else {
+          setCars(Array.isArray(response.data) ? response.data : []);
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [BASE_URL]);
+
+  // Handle Filtering
   const filteredCars =
     activeTab === "All vehicles"
-      ? CAR_DATA
-      : CAR_DATA.filter((car) => car.category === activeTab);
+      ? cars
+      : cars.filter((car) => car.category === activeTab);
+
+  if (loading) return <RentRideLoader />;
+  if (error) return <ErrorPage />;
 
   return (
     <div className="bg-gray-50 min-h-screen p-8">
@@ -168,8 +207,8 @@ const SelectVehicle = () => {
               onClick={() => setActiveTab(cat)}
               className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
                 activeTab === cat
-                  ? "bg-lime-800 text-white shadow-lg shadow-green-200"
-                  : "bg-white text-gray-600 hover:bg-green-50"
+                  ? "bg-lime-800 text-white shadow-lg"
+                  : "bg-white text-gray-600 hover:bg-green-50 border border-gray-100"
               }`}
             >
               {cat}
@@ -178,11 +217,28 @@ const SelectVehicle = () => {
         </div>
 
         {/* Grid Display */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredCars.map((car) => (
-            <VehicleCard key={car.id} car={car} />
-          ))}
-        </div>
+        {filteredCars.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filteredCars.map((car) => (
+              <VehicleCard
+                key={car._id}
+                
+                onClick={() => navigate(`/carDetails/${car._id}`)}
+                car={{
+                  ...car,
+                  id: car._id,
+                  name: car.carName,
+                  image: car.images?.[0] || "https://via.placeholder.com/300x200?text=No+Image",
+                  price: car.pricePerDay,
+                }}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20 text-gray-400 font-medium">
+            No vehicles found in the "{activeTab}" category.
+          </div>
+        )}
       </div>
     </div>
   );

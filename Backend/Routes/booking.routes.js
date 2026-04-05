@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { createBooking, getUserBookings, getOwnerBookings, cancelBooking, confirmBooking } = require("../Controllers/booking.controller");
+const { createBooking, getUserBookings, getOwnerBookings, cancelBooking, confirmBooking, completeBooking } = require("../Controllers/booking.controller");
 const { ensureAuthenticated } = require("../Middlewares/auth.middleware");
 const roleMiddleware = require("../Middlewares/role.middleware");
 
@@ -15,6 +15,9 @@ router.get("/owner",ensureAuthenticated,roleMiddleware(["owner"]),getOwnerBookin
 
 //confirm booking
 router.patch("/:id/confirm",ensureAuthenticated,roleMiddleware(["owner"]),confirmBooking);
+
+//complete booking
+router.patch("/:id/complete",ensureAuthenticated,roleMiddleware(["user"]),completeBooking);
 
 //cancel booking
 router.patch("/:id/cancel",ensureAuthenticated,cancelBooking);

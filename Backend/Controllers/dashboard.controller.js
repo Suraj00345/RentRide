@@ -3,36 +3,34 @@ const mongoose = require("mongoose");
 
 const getMonthlyEarnings = async (req, res) => {
   try {
-    const ownerId = new mongoose.Types.ObjectId(req.user.userId);
+    const ownerId = new mongoose.Types.ObjectId(req.userId);
 
     const data = await Booking.aggregate([
       {
         $match: {
           ownerId,
-          status: { $in: ["confirmed", "completed"] }
-        }
+          status: { $in: ["confirmed", "completed"] },
+        },
       },
       {
         $group: {
           _id: { $month: "$createdAt" },
-          earnings: { $sum: "$totalPrice" }
-        }
+          earnings: { $sum: "$totalPrice" },
+        },
       },
       {
-        $sort: { "_id": 1 }
-      }
+        $sort: { _id: 1 },
+      },
     ]);
 
     return res.json({
       success: true,
-      data
+      data,
     });
-
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server error" });
   }
 };
-
 
 module.exports = getMonthlyEarnings;
