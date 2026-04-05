@@ -2,13 +2,23 @@ const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated } = require("../Middlewares/auth.middleware");
 const roleMiddleware = require("../Middlewares/role.middleware");
-const getMonthlyEarnings = require("../Controllers/dashboard.controller");
+const {
+  getOwnerDashboard,
+  getUserDashboard,
+} = require("../Controllers/dashboard.controller");
 
 router.get(
-  "/earning",
-  roleMiddleware(["owner"]),
+  "/owner",
   ensureAuthenticated,
-  getMonthlyEarnings,
+  roleMiddleware(["owner"]),
+  getOwnerDashboard,
+);
+
+router.get(
+  "/user",
+  ensureAuthenticated,
+  roleMiddleware(["user"]),
+  getUserDashboard,
 );
 
 module.exports = router;

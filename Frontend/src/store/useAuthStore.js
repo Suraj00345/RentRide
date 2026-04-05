@@ -5,9 +5,9 @@ import { persist } from "zustand/middleware";
 export const useAuthStore = create(
   persist(
     (set) => ({
-      user:  localStorage.getItem("username"),
-      token: localStorage.getItem("token"),
-      role:  localStorage.getItem("role"), // "admin" | "owner" | "user"
+      // user:  localStorage.getItem("username"),
+      // token: localStorage.getItem("token"),
+      // role:  localStorage.getItem("role"), // "admin" | "owner" | "user"
 
       login: (userData, token) =>
         set({ user: userData, token, role: userData.role }),

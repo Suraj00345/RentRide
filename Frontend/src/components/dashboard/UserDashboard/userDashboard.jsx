@@ -69,11 +69,7 @@ export default function UserDashboard() {
 
         <main className="flex-1 overflow-y-auto p-6">
           {activeNav === "overview" && (
-            <OverviewPage
-              bookings={bookings}
-              stats={stats}
-              onViewAllBookings={() => setActiveNav("bookings")}
-            />
+            <OverviewPage onViewAllBookings={() => setActiveNav("bookings")} />
           )}
           {activeNav === "bookings" && (
             <BookingsPage bookings={bookings} onRate={handleRate} />

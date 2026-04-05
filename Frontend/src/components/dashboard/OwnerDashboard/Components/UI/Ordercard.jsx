@@ -6,9 +6,6 @@ const OrderCard = ({ order, onAction, isActioning }) => {
   const car = order.carId || {};
   const customer = order.userId || {};
 
-  console.log(customer);
-  
-
   const initials =
     `${customer.firstname?.[0] ?? ""}${customer.lastname?.[0] ?? ""}`.toUpperCase() ||
     "?";

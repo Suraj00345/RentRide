@@ -36,7 +36,7 @@ app.use(
 app.use("/auth", authRoutes);
 app.use("/car", carRoutes);
 app.use("/booking", bookingRoutes);
-app.use("/dashbaord", dashboardRoutes);
+app.use("/dashboard", dashboardRoutes);
 
 //Health Check
 app.get("/ping", (req, res) => {

@@ -25,10 +25,6 @@ const TopBar = ({ activeNav, onMenuOpen }) => (
     </div>
 
     <div className="flex items-center gap-3">
-      <button className="relative p-2 rounded-xl hover:bg-gray-50 text-gray-500 transition">
-        <span className="text-lg">🔔</span>
-        <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-green-500 rounded-full" />
-      </button>
       <button className="hidden sm:flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors">
         <span>+</span> Add Car
       </button>
