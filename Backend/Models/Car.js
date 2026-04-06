@@ -35,6 +35,15 @@ const carSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    year: {
+      type: String,
+    },
+    documents: {
+      type: String,
+    },
+    insurance: {
+      type: String,
+    },
     images: [
       {
         type: String,
@@ -79,11 +88,15 @@ const carSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    isApproved: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
 );
 
 // IMPORTANT INDEX FOR SEARCH
-carSchema.index({ city: 1, pricePerDay: 1 });
+carSchema.index({ city: 1, pricePerDay: 1, seats: 1, carName: 1 });
 
 module.exports = mongoose.model("Car", carSchema);

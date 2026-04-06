@@ -49,7 +49,7 @@ const Sidebar = ({ activeNav, onNavChange, onClose, pendingCounts }) => (
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold text-gray-900 truncate">
-            Admin User
+            {localStorage.getItem("username")}
           </p>
           <p className="text-xs text-red-500 font-semibold">Super Admin</p>
         </div>
