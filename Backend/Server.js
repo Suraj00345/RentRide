@@ -25,12 +25,7 @@ if (process.env.NODE_ENV === "development") {
 //middlewares
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL || "*",
-    credentials: true,
-  }),
-);
+
 
 //Routes
 app.use("/auth", authRoutes);
