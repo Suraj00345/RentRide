@@ -4,11 +4,10 @@ import VehicleCard from "./VehicleCard";
 import axios from "axios";
 import RentRideLoader from "../../utils/Loader";
 import ErrorPage from "../../utils/ErrorPage";
-import VITE_API_URL from "../../api"
+import VITE_API_URL from "../../api";
 const BASE_URL = VITE_API_URL;
 
 console.log(BASE_URL);
-
 
 export const CAR_DATA = [
   {
@@ -156,24 +155,23 @@ const categories = [
   "Minivan",
 ];
 const SelectVehicle = () => {
-
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("All vehicles");
-  const [cars, setCars] = useState([]); 
+  const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${BASE_URL}/car`);
+        const response = await axios.get(`${BASE_URL}/car`, {
+          withCredentials: true,
+        });
 
         if (response.data && response.data.cars) {
           setCars(response.data.cars);
-          
         } else {
           setCars(Array.isArray(response.data) ? response.data : []);
         }
@@ -226,13 +224,14 @@ const SelectVehicle = () => {
             {filteredCars.map((car) => (
               <VehicleCard
                 key={car._id}
-                
                 onClick={() => navigate(`/carDetails/${car._id}`)}
                 car={{
                   ...car,
                   id: car._id,
                   name: car.carName,
-                  image: car.images?.[0] || "https://via.placeholder.com/300x200?text=No+Image",
+                  image:
+                    car.images?.[0] ||
+                    "https://via.placeholder.com/300x200?text=No+Image",
                   price: car.pricePerDay,
                 }}
               />
