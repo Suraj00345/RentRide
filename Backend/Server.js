@@ -25,7 +25,11 @@ if (process.env.NODE_ENV === "development") {
 //middlewares
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors({
+  origin: ["https://rent-ride-nine.vercel.app", "http://localhost:5173"], // Allow both production and local dev
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  credentials: true
+}));
 
 //Routes
 app.use("/auth", authRoutes);
