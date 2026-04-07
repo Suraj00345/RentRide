@@ -7,6 +7,9 @@ import ErrorPage from "../../utils/ErrorPage";
 import VITE_API_URL from "../../api"
 const BASE_URL = VITE_API_URL;
 
+console.log(BASE_URL);
+
+
 export const CAR_DATA = [
   {
     id: 1,
