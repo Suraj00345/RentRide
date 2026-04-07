@@ -20,7 +20,8 @@ import { transactionStatusConfig } from "../../constants";
 import RentRideLoader from "../../../../../utils/Loader";
 import ErrorPage from "../../../../../utils/ErrorPage";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+import VITE_API_URL from "../../../../../api"
+const BASE_URL = VITE_API_URL;
 
 const OverviewPage = ({ onNavigate }) => {
   const [data, setData] = useState(null);

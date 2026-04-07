@@ -5,12 +5,13 @@ import OrderCard from "../UI/Ordercard";
 import RentRideLoader from "../../../../../utils/Loader";
 import { ORDER_FILTERS } from "../../Constant/index";
 
+import VITE_API_URL from "../../../../../api";
+const BASE_URL = VITE_API_URL;
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(true);
 
-  const BASE_URL = import.meta.env.VITE_API_URL;
   const token = localStorage.getItem("token");
 
   // --- 1. FETCH ORDERS (Bookings made on Owner's cars) ---

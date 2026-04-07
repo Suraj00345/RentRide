@@ -6,6 +6,8 @@ import SpecCard from "./SpecCard";
 import RentRideLoader from "../../utils/Loader";
 import ErrorPage from "../../utils/ErrorPage";
 import BookingModal from "../common/BookingModal";
+import VITE_API_URL from "../../api"
+const BASE_URL = VITE_API_URL;
 
 const VehicleSpecs = () => {
   const { id } = useParams(); // Get ID from URL
@@ -15,7 +17,6 @@ const VehicleSpecs = () => {
   const [mainImage, setMainImage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const BASE_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchCarDetails = async () => {

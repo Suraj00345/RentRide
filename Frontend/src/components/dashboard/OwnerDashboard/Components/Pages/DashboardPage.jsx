@@ -14,8 +14,8 @@ import StatusBadge from "../UI/StatusBadge";
 import CustomTooltip from "../UI/CustomTooltip";
 import RentRideLoader from "../../../../../utils/Loader";
 import ErrorPage from "../../../../../utils/ErrorPage";
-
-const BASE_URL = import.meta.env.VITE_API_URL;
+import VITE_API_URL from "../../../../../api";
+const BASE_URL = VITE_API_URL;
 
 const DashboardPage = ({ onViewAllOrders }) => {
   const [data, setData] = useState(null);

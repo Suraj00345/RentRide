@@ -3,7 +3,8 @@ import axios from "axios";
 import CarCard from "../UI/CarCard";
 
 const FILTERS = ["all", "pending", "approved", "rejected"];
-const BASE_URL = import.meta.env.VITE_API_URL;
+import VITE_API_URL from "../../../../../api"
+const BASE_URL = VITE_API_URL;
 
 const CarApprovalsPage = () => {
   const [cars, setCars] = useState([]);

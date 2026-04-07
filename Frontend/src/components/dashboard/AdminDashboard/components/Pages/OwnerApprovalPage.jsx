@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import OwnerCard from "../UI/OwnerCard";
 import RentRideLoader from "../../../../../utils/Loader";
+import VITE_API_URL from "../../../../../api"
+const BASE_URL = VITE_API_URL;
 
 const FILTERS = ["all", "pending", "approved", "rejected"];
-const BASE_URL = import.meta.env.VITE_API_URL;
 
 const OwnerApprovalsPage = () => {
   const [owners, setOwners] = useState([]);

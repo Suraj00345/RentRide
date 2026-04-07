@@ -6,7 +6,8 @@ import EditCarModal from "../UI/EditCarModal";
 import CarCard from "../UI/CarCard";
 import Loader from "../../../../../utils/Loader";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+import VITE_API_URL from "../../../../../api"
+const BASE_URL = VITE_API_URL;
 
 const authHeader = () => ({
   Authorization: localStorage.getItem("token"),

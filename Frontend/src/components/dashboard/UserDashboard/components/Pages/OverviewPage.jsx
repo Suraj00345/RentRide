@@ -13,8 +13,12 @@ import StatCard from "../UI/StatCard";
 import StatusBadge from "../UI/StatusBadge";
 import StarRating from "../UI/StarRatting";
 import CustomTooltip from "../UI/CustomTooltip";
+import RentRideLoader from "../../../../../utils/Loader";
+import ErrorPage from "../../../../../utils/ErrorPage";
+import VITE_API_URL from "../../../../../api"
+const BASE_URL = VITE_API_URL;
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+
 
 const OverviewPage = ({ onViewAllBookings }) => {
   // Added opening brace and prop
@@ -44,13 +48,11 @@ const OverviewPage = ({ onViewAllBookings }) => {
 
   if (loading)
     return (
-      <div className="p-10 text-center font-semibold text-gray-500">
-        Loading Dashboard...
-      </div>
+      <RentRideLoader/>
     );
   if (!data)
     return (
-      <div className="p-10 text-center text-red-500">Error loading data.</div>
+      <ErrorPage/>
     );
 
   // Transform API monthly object { "Jan 2026": 500 } to Recharts array [{ month: "Jan 2026", spend: 500 }]

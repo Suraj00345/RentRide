@@ -4,13 +4,14 @@ import toast from "react-hot-toast";
 import BookingCard from "../UI/BookingCard";
 import RentRideLoader from "../../../../../utils/Loader";
 import { BOOKING_FILTERS } from "../../constants/index";
+import VITE_API_URL from "../../../../../api";
+const BASE_URL = VITE_API_URL;
 
 const BookingsPage = () => {
   const [bookings, setBookings] = useState([]);
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(true);
 
-  const BASE_URL = import.meta.env.VITE_API_URL;
   const token = localStorage.getItem("token");
 
   const getHeaders = () => ({
@@ -25,7 +26,6 @@ const BookingsPage = () => {
       if (data.success) {
         setBookings(data.bookings);
         // console.log(data.bookings);
-        
       }
     } catch (error) {
       toast.error("Failed to load your bookings");
@@ -87,7 +87,9 @@ const BookingsPage = () => {
         fetchMyBookings();
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to complete booking");
+      toast.error(
+        error.response?.data?.message || "Failed to complete booking",
+      );
     }
   };
 

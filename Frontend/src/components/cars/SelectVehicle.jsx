@@ -4,6 +4,8 @@ import VehicleCard from "./VehicleCard";
 import axios from "axios";
 import RentRideLoader from "../../utils/Loader";
 import ErrorPage from "../../utils/ErrorPage";
+import VITE_API_URL from "../../api"
+const BASE_URL = VITE_API_URL;
 
 export const CAR_DATA = [
   {
@@ -159,7 +161,6 @@ const SelectVehicle = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const BASE_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchData = async () => {
