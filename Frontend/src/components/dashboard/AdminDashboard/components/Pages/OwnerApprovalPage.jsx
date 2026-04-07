@@ -17,7 +17,7 @@ const OwnerApprovalsPage = () => {
   // ─── Fetch Owners ─────────────────────────────
   const fetchOwners = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}dashboard/getOwners`, {
+      const res = await axios.get(`${BASE_URL}/dashboard/getOwners`, {
         headers: { Authorization: token },
       });
       setOwners(res.data?.data?.owners || []);

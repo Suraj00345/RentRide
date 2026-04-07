@@ -26,7 +26,7 @@ const DashboardPage = ({ onViewAllOrders }) => {
     const fetchOwnerData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`${BASE_URL}dashboard/owner`, {
+        const response = await axios.get(`${BASE_URL}/dashboard/owner`, {
           headers: { Authorization: token },
         });
 

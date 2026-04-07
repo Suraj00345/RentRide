@@ -18,7 +18,7 @@ const OrdersPage = () => {
   const fetchOwnerOrders = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`${BASE_URL}booking/owner`, {
+      const { data } = await axios.get(`${BASE_URL}/booking/owner`, {
         headers: { Authorization: token },
       });
       if (data.success) {

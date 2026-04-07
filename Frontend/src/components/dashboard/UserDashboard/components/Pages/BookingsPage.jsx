@@ -22,7 +22,7 @@ const BookingsPage = () => {
     try {
       setLoading(true);
       // FIXED: Use the helper to ensure Bearer token is sent
-      const { data } = await axios.get(`${BASE_URL}booking/user`, getHeaders());
+      const { data } = await axios.get(`${BASE_URL}/booking/user`, getHeaders());
       if (data.success) {
         setBookings(data.bookings);
         // console.log(data.bookings);

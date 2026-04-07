@@ -31,7 +31,7 @@ const OverviewPage = ({ onNavigate }) => {
     const fetchAdminData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`${BASE_URL}dashboard/admin`, {
+        const response = await axios.get(`${BASE_URL}/dashboard/admin`, {
           headers: { Authorization: token },
         });
 

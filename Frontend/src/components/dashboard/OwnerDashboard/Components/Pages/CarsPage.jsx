@@ -43,7 +43,7 @@ const CarsPage = () => {
   const fetchOwnerCars = useCallback(async () => {
     setIsLoading(true);
     try {
-      const { data } = await axios.get(`${BASE_URL}car/ownerCars`, {
+      const { data } = await axios.get(`${BASE_URL}/car/ownerCars`, {
         headers: authHeader(),
       });
       if (data.success) {

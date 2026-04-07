@@ -16,7 +16,7 @@ const CarApprovalsPage = () => {
   // ─── Fetch Cars ─────────────────────────────
   const fetchCars = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}dashboard/getCar`, {
+      const res = await axios.get(`${BASE_URL}/dashboard/getCar`, {
         headers: { Authorization: token },
       });
 

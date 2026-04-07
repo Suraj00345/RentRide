@@ -29,7 +29,7 @@ const OverviewPage = ({ onViewAllBookings }) => {
     const fetchOverviewData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`${BASE_URL}dashboard/user`, {
+        const response = await axios.get(`${BASE_URL}/dashboard/user`, {
           headers: { Authorization: token },
         });
 

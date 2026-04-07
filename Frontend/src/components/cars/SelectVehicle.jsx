@@ -167,7 +167,7 @@ const SelectVehicle = () => {
       try {
         setLoading(true);
         // Added a check to ensure BASE_URL doesn't end with double slashes if the string already has one
-        const response = await axios.get(`${BASE_URL}car`);
+        const response = await axios.get(`${BASE_URL}/car`);
 
         if (response.data && response.data.cars) {
           setCars(response.data.cars);
