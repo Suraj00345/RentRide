@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Sidebar from "../UserDashboard/components/layout/SideBar";
-import TopBar from "../UserDashboard/components/layout/TopBar";
-import OverviewPage from "../UserDashboard/components/Pages/OverviewPage";
-import BookingsPage from "../UserDashboard/components/Pages/BookingsPage";
-import SavedCarsPage from "../UserDashboard/components/Pages/SavedCarsPage";
-import ProfilePage from "../UserDashboard/components/Pages/ProfilePage";
-import PlaceholderPage from "../UserDashboard/components/Pages/PlaceHoldersPage";
+import Sidebar from "./components/layout/SideBar";
+import TopBar from "./components/layout/TopBar";
+import OverviewPage from "./components/Pages/OverviewPage";
+import BookingsPage from "./components/Pages/BookingsPage";
+import SavedCarsPage from "./components/Pages/SavedCarsPage";
+import ProfilePage from "./components/Pages/ProfilePage";
+import PlaceholderPage from "./components/Pages/PlaceHoldersPage";
 import { bookingsData, savedCars as initialSaved, userProfile } from "./data";
 
 export default function UserDashboard() {
