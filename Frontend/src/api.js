@@ -1,2 +1,2 @@
-const VITE_API_URL = "http://localhost:3000/";
+const VITE_API_URL = "https://rentride-642s.onrender.com//";
 export default VITE_API_URL;
