@@ -4,12 +4,19 @@ import VerificationPill from "./verificationPill";
 import { approvalStatusConfig } from "../../constants";
 
 const OwnerCard = ({ owner, onApprove, onReject }) => {
-  // Determine status string for the UI based on boolean fields
-  const status = owner.isBanned
-    ? "rejected"
-    : owner.isApproved
-      ? "approved"
-      : "pending";
+  const sign = owner.isBanned 
+  ? "banned" 
+  : owner.isApproved;
+
+ const status = sign === "approved" 
+  ? "Approved" 
+  : sign === "pending" 
+    ? "Pending" 
+    : sign === "rejected" 
+      ? "Rejected" 
+      : "Banned";
+
+  // console.log(status);
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">

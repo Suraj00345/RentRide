@@ -9,6 +9,7 @@ const Register = async (req, res) => {
 
     // Check if user already exists to prevent duplicate accounts
     const user = await UserModel.findOne({ email });
+    
     if (user) {
       return res.status(409).json({
         message: "User is already exist, you can login",
@@ -21,7 +22,7 @@ const Register = async (req, res) => {
 
     // Hash the password before saving (10 rounds of salt)
     userModel.password = await bcrypt.hash(password, 10);
-
+    
     // Save the user to the database
     await userModel.save();
 

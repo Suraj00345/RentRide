@@ -195,7 +195,7 @@ const toggleBanUser = async (req, res) => {
       });
     }
 
-    user.isBanned = !user.isBanned;
+    user.isBanned = user.isBanned === "banned" ? "NotBanned" : "banned";
     await user.save();
 
     res.status(200).json({
@@ -203,6 +203,7 @@ const toggleBanUser = async (req, res) => {
       message: user.isBanned
         ? "User banned successfully"
         : "User unbanned successfully",
+      currentStatus: user.isBanned,
     });
   } catch (error) {
     console.error("Ban User Error:", error);
@@ -425,7 +426,7 @@ const getAllOwners = async (req, res) => {
         $project: {
           _id: 1,
           firstname: "$firstname",
-          lastname: "$lastname", 
+          lastname: "$lastname",
           email: 1,
           phone_no: 1,
           city: 1,
@@ -464,6 +465,27 @@ const getAllOwners = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({ role: { $in: ["user", "owner"] } })
+      .select("-password") // hide password
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      count: users.length,
+      users,
+    });
+  } catch (error) {
+    console.error("Get users error:", error.message);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
 module.exports = {
   getOwnerDashboard,
   getUserDashboard,
@@ -473,4 +495,5 @@ module.exports = {
   getAdminOverview,
   getAllcar,
   getAllOwners,
+  getAllUsers,
 };

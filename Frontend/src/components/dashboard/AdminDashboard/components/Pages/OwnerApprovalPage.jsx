@@ -21,6 +21,7 @@ const OwnerApprovalsPage = () => {
         headers: { Authorization: token },
       });
       setOwners(res.data?.data?.owners || []);
+    //  console.log(res.data?.data?.owners);
      
       
     } catch (error) {
@@ -38,7 +39,7 @@ const OwnerApprovalsPage = () => {
   const handleToggleApprove = async (userId) => {
     try {
       await axios.patch(
-        `${BASE_URL}dashboard/toggleApprove-owner/${userId}`,
+        `${BASE_URL}/dashboard/toggleApprove-owner/${userId}`,
         {},
         {
           headers: { Authorization: token }, // ✅ FIXED
@@ -65,7 +66,7 @@ const OwnerApprovalsPage = () => {
 
   // ─── Status mapping ──────────────────────────
   const getStatus = (o) =>
-    o.isBanned ? "rejected" : o.isApproved ? "approved" : "pending";
+    o.isBanned ? "banned" : o.isApproved ? "approved" : "pending";
 
   const filtered =
     filter === "all" ? owners : owners.filter((o) => getStatus(o) === filter);

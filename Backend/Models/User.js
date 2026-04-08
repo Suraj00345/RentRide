@@ -41,14 +41,18 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
     isApproved: {
-      type: Boolean,
+      type: String,
+      enum: ["pending", "approved", "rejected"],
       default: function () {
-        return this.role === "user" || this.role === "admin";
+        return this.role === "user" || this.role === "admin"
+          ? "approved"
+          : "pending";
       },
     },
     isBanned: {
-      type: Boolean,
-      default: false,
+      type: String,
+      enum:["banned","NotBanned"],
+      default: "NotBanned"
     },
   },
   { timestamps: true },
